@@ -1,5 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+
 const port = 5000;
 
 app.get('/', (req, res) => {
@@ -9,17 +14,17 @@ app.get('/', (req, res) => {
 
 const users = [
     
-    { id: 1, name: "Shabana", email: "Shabana@gmail.com", phone: "01788888888" },
+    { id: 0, name: "Shabana", email: "Shabana@gmail.com", phone: "01788888888" },
 
-    { id: 2, name: "Shabnor", email: "Shabnor@gmail.com", phone: "01788888888" },
+    { id: 1, name: "Shabnor", email: "Shabnor@gmail.com", phone: "01788888888" },
 
-    { id: 3, name: "Shabonti", email: "Shabonti@gmail.com", phone: "01788888888" },
+    { id: 2, name: "Shabonti", email: "Shabonti@gmail.com", phone: "01788888888" },
 
-    { id: 4, name: "Shuhorita", email: "Shuhorita@gmail.com", phone: "01788888888" },
+    { id: 3, name: "Shuhorita", email: "Shuhorita@gmail.com", phone: "01788888888" },
 
-    { id: 5, name: "Soniya", email: "Soniya@gmail.com", phone: "01788888888" },
+    { id: 4, name: "Soniya", email: "Soniya@gmail.com", phone: "01788888888" },
 
-    { id: 6, name: "Shusmita", email: "Shusmita@gmail.com", phone: "01788888888" },
+    { id: 5, name: "Shusmita", email: "Shusmita@gmail.com", phone: "01788888888" },
 
 ];
 
@@ -36,6 +41,17 @@ app.get('/users', (req, res) => {
     }
     
 });
+
+//app.method
+app.post('/users', (req, res) => {
+    const newUser = req.body;
+    newUser.id = users.length;
+    users.push(newUser);
+
+    console.log('hitting the post', req.body);
+    //res.send(JSON.stringify(newUser));
+    res.json(newUser);
+})
  
 //dynamic api
 app.get('/users/:id', (req, res) => {
